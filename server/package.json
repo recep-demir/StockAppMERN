@@ -10,7 +10,7 @@
     "dev": "node swaggerAutogen && nodemon index.js"
   },
   "keywords": [],
-  "author": "CourseName",
+  "author": "Recep Demir",
   "license": "ISC Licence",
 
   "dependencies": {
