@@ -18,6 +18,22 @@ app.use(require('./src/middlewares/queryHandler'));
 
 
 
+app.all('/', (req, res) => {
+    res.send({
+        error: false,
+        message: 'Welcome to StockApiMERN',
+        documents: {
+            swagger: '/documents/swagger',
+            redoc: '/documents/redoc',
+            json: '/documents/json',
+        },
+        user: req.user
+    })
+});
+
+app.use(require('./src/routes'));
+
+
 
 
 app.use(require('./src/middlewares/errorHandler'))
