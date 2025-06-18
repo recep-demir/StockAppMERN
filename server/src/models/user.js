@@ -58,6 +58,8 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
+userSchema.pre(['save', 'findOneAndUpdate'], function (next) {})
+
 
 
 module.exports = mongoose.model("User", userSchema);
