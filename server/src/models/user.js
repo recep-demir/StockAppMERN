@@ -61,25 +61,33 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre(['save', 'findOneAndUpdate'], function (next) {
-    const isEmailValidated = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
-    const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(this.password);
+    const data = this?._update ?? this; 
 
-    if(isEmailValidated){
-        if (isPasswordValidated){
-            this.password = passwordEncrypt(this.password)
 
-            next()
-            
+    const isEmailValidated = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email);
+    const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(data.password);
+
+    if (isEmailValidated) {
+
+        if (isPasswordValidated) {
+
+            if (this._update) { // Update
+                this._update.password = passwordEncrypt(data.password);
+
+            } else { // Create
+                this.password = passwordEncrypt(data.password);
+            };
+
+            next();
+
         } else {
             next(new CustomError('Password is not validated', 400));
         };
 
-        next()
-
     } else {
         next(new CustomError('Email is not validated', 400));
-    }
-})
+    };
+});
 
 
 
