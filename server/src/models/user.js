@@ -60,7 +60,23 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
-userSchema.pre(['save', 'findOneAndUpdate'], function (next) {})
+userSchema.pre(['save', 'findOneAndUpdate'], function (next) {
+    const isEmailValidated = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
+    const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(this.password);
+
+    if(isEmailValidated){
+        if (isPasswordValidated){
+            next()
+        } else {
+            next(new CustomError('Password is not validated', 400));
+        };
+
+        next()
+
+    } else {
+        next(new CustomError('Email is not validated', 400));
+    }
+})
 
 
 
