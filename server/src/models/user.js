@@ -66,7 +66,10 @@ userSchema.pre(['save', 'findOneAndUpdate'], function (next) {
 
     if(isEmailValidated){
         if (isPasswordValidated){
+            this.password = passwordEncrypt(this.password)
+
             next()
+            
         } else {
             next(new CustomError('Password is not validated', 400));
         };
