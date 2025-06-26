@@ -108,6 +108,16 @@ module.exports = {
 
             let message = null, result = {};
 
+            if(tokenKey) {
+                if (tokenKey[0] == 'Token') {
+                result = await Token.deleteOne({ token: tokenKey[1] });
+                message = 'Token deleted. Logout is OK.'
+            } 
+
+            } else {
+                message = 'Logout is OK'
+            }
+
 
 
 
