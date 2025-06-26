@@ -118,10 +118,9 @@ module.exports = {
                 message = 'Logout is OK'
             }
 
-
-
-
+            res.status(200).send({
+            error: false,
+            message
+        });
     }
-
-
 }
