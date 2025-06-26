@@ -106,6 +106,8 @@ module.exports = {
             const auth = req.headers?.authorization || null;
             const tokenKey = auth ? auth.split(' ') : null;
 
+            let message = null, result = {};
+
 
 
 
