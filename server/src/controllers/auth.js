@@ -103,7 +103,9 @@ module.exports = {
             #swagger.description = 'Delete token-key.'
         */
 
-            
+            const auth = req.headers?.authorization || null;
+            const tokenKey = auth ? auth.split(' ') : null;
+
 
 
 
