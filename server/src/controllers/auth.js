@@ -54,6 +54,46 @@ module.exports = {
         });
 
     },
+    refresh: async (req, res) => {
+        /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'JWT: Refresh'
+            #swagger.description = 'Refresh access-token by refresh-token.'
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    bearer: {
+                        refresh: '___refreshToken___'
+                    }
+                }
+            }
+        */
+
+        const { refreshToken } = req.body;
+
+        if (!refreshToken) throw new CustomError('Refresh token is required.');
+
+        jwt.verify(refreshToken, process.env.REFRESH_KEY, async function (err, userData) {
+
+            if (!userData) throw new CustomError(err.message, 401);
+
+            const user = await User.findOne({ _id: userData._id });
+
+            if (!user) throw new CustomError('Id is not verified.');
+
+            if (!user.isActive) throw new CustomError('This account is not active.');
+
+            const { _id, email, password, ...accessPayload } = user._doc;
+            const accessToken = jwt.sign(accessPayload, process.env.ACCESS_KEY, { expiresIn: '30m' });
+
+            res.status(200).send({
+                error: false,
+                bearer: { accessToken }
+            });
+
+        });
+    },
 
 
 }
