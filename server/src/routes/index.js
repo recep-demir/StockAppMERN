@@ -7,7 +7,7 @@ router.use('/documents', require('./document'))
 
 
 // auth:
-// router.use('/auth', require('./auth'));
+router.use('/auth', require('./auth'));
 
 // user:
 router.use('/users', require('./user'));
