@@ -20,7 +20,11 @@ module.exports = {
             `
         */
 
-        const result = await res.getModelList(Sale);
+        const result = await res.getModelList(Sale, {}, [
+            { path: 'userId', select: 'username' },
+            { path: 'brandId', select: 'name' },
+            { path: 'productId', select: 'name' },
+        ]);
 
         res.status(200).send({
             error: false,
