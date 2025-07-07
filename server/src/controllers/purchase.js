@@ -48,6 +48,7 @@ module.exports = {
                 }
             }
         */
+       req.body.userId = req.user._id;
 
         const result = await Purchase.create(req.body);
 
