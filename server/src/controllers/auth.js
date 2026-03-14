@@ -30,7 +30,7 @@ module.exports = {
 
         const user = await User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] });
 
-        if (!user && user.password !== passwordEncrypt(req.body.password)) throw new CustomError('Wrong email/username or password');
+        if (!user || user.password !== passwordEncrypt(req.body.password)) throw new CustomError('Wrong email/username or password');
 
         if (!user.isActive) throw new CustomError('This account is not active.');
 
