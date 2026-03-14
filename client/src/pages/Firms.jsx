@@ -33,7 +33,7 @@ const Firms = () => {
       
       <Button variant="contained" onClick={handleOpen}>NEW FIRM</Button>
       <Grid container spacing={2} mt={2}>
-        {firms.map((firm, index) => (
+        {firms?.map((firm, index) => (
           <Grid item xs={12} md={6} lg={4} xl={3} key={index}>
             <FirmsCard {...firm} setInitialState={setInitialState} handleOpen={handleOpen}/>
           </Grid>
