@@ -74,13 +74,13 @@ export const Charts = () => {
 
   const salesData = sales?.map((sale) => ({
     date: new Date(sale.createdAt).toLocaleString(),
-    amount: sale.amount,
+    amount: sale.priceTotal,
   })) || [];
 
   /* -------------------------------------------------------------------------- */
   const purchasesData = purchases?.map((purc) => ({
     date: new Date(purc.createdAt).toLocaleString(),
-    amount: purc.amount,
+    amount: purc.priceTotal,
   })) || [];
 
   return (
