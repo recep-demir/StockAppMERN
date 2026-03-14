@@ -26,9 +26,9 @@ const useAuthCall = () => {
     const logout=async()=>{
         dispatch(fetchStart())
         try {
-            const {data} = await axios(`${BASE_URL}auth/logout`, {headers: {
-                Authorization:`Token ${token}`
-            }})
+            const {data} = await axios.post(`${BASE_URL}auth/logout`, {}, {
+                headers: { Authorization: `Token ${token}` }
+            })
             dispatch(logoutSuccess())
             toastSuccessNotify("Log Outted!")
             navigate("/")
