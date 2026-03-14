@@ -10,33 +10,7 @@ const useStockCall = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const {axiosWithToken} = useAxios()
 
-  //! 2- useAxios Hook'u oluşturup axiosWithToken ile değiştirdim.
-//   const { token } = useSelector((state) => state.auth);
-
-//   const getFirms = async () => {
-//     dispatch(fetchStart());
-//     try {
-//       const { data } = await axios(`${BASE_URL}firms`, {
-//         headers: {
-//           Authorization: `Token ${token}`,
-//         },
-//       });
-//       dispatch(firmSuccess(data));
-//     } catch (error) {
-//       dispatch(fetchFail());
-//     }
-//   };
-//! 1- En eski yapı
-// const getFirms = async () => {
-//     dispatch(fetchStart());
-//     try {
-//       const { data } = await axiosWithToken.get("firms")
-//       dispatch(firmSuccess(data));
-//     } catch (error) {
-//       dispatch(fetchFail());
-//     }
-//   };
-//! 3- Güncel yapı, Data çekme
+ 
   const getStockData = async (url) => {
     dispatch(fetchStart());
     try {
@@ -93,7 +67,11 @@ const useStockCall = () => {
         axiosWithToken("categories"),
         axiosWithToken("brands")
       ])
-      dispatch(getProCatBrandSuccess([products?.data?.data, categories?.data?.data, brands?.data?.data]))
+      dispatch(getProCatBrandSuccess([
+        products?.data?.data || [], 
+        categories?.data?.data || [], 
+        brands?.data?.data || []
+      ]))
     } catch (error) {
       dispatch(fetchFail())
     }
