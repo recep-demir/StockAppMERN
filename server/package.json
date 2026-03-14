@@ -13,6 +13,7 @@
   "author": "CourseName",
   "license": "ISC Licence",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^16.3.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
@@ -23,5 +24,8 @@
     "redoc-express": "^2.1.0",
     "swagger-autogen": "^2.23.6",
     "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
