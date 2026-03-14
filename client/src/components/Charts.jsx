@@ -72,16 +72,16 @@ export const Charts = () => {
 
   //   Düzenlenmiş sales bilgisi
 
-  const salesData = sales.map((sale) => ({
+  const salesData = sales?.map((sale) => ({
     date: new Date(sale.createdAt).toLocaleString(),
     amount: sale.amount,
-  }));
+  })) || [];
 
   /* -------------------------------------------------------------------------- */
-  const purchasesData = sales.map((purc) => ({
+  const purchasesData = purchases?.map((purc) => ({
     date: new Date(purc.createdAt).toLocaleString(),
     amount: purc.amount,
-  }));
+  })) || [];
 
   return (
     <>
