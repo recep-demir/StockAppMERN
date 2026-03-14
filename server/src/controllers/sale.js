@@ -1,6 +1,10 @@
 "use strict"
+/* -------------------------------------------------------
+    | FULLSTACK TEAM | NODEJS / EXPRESS |
+------------------------------------------------------- */
 
 const Sale = require('../models/sale');
+const Product = require('../models/product');
 const CustomError = require('../helpers/customError');
 
 module.exports = {
@@ -20,7 +24,7 @@ module.exports = {
             `
         */
 
-        const result = await res.getModelList(Sale, {}, [
+        const data = await res.getModelList(Sale, {}, [
             { path: 'userId', select: 'username' },
             { path: 'brandId', select: 'name' },
             { path: 'productId', select: 'name' },
@@ -29,7 +33,7 @@ module.exports = {
         res.status(200).send({
             error: false,
             details: await res.getModelListDetails(Sale),
-            result
+            data
         });
     },
 
@@ -46,11 +50,23 @@ module.exports = {
             }
         */
 
-        const result = await Sale.create(req.body);
+        req.body.userId = req.user._id;
+
+        // Get current product 
+        const currentProduct = await Product.findById(req.body.productId);
+
+        if (currentProduct.quantity < req.body.quantity) throw new CustomError(`There is not enough product-quantity for this sale. current quantity:${currentProduct.quantity}`, 400)
+
+        const data = await Sale.create(req.body);
+
+        if (data) {
+            // Update product quantity
+            await Product.updateOne({ _id: data.productId }, { $inc: { quantity: -data.quantity } });
+        }
 
         res.status(201).send({
             error: false,
-            result
+            data
         });
     },
 
@@ -60,11 +76,15 @@ module.exports = {
             #swagger.summary = "Get Single Sale"
         */
 
-        const result = await Sale.findById(req.params.id);
+        const data = await Sale.findById(req.params.id).populate([
+            { path: 'userId', select: 'username' },
+            { path: 'brandId', select: 'name' },
+            { path: 'productId', select: 'name' },
+        ]);
 
         res.status(200).send({
             error: false,
-            result
+            data
         });
     },
 
@@ -81,13 +101,26 @@ module.exports = {
             }
         */
 
-        const result = await Sale.findByIdAndUpdate(req.params.id, req.body, { runValidators: true, new: true });
+        if (req.body.quantity) {
+            // Get current quantity
+            const currentSale = await Sale.findById(req.params.id); // 5
 
-        if (!result) throw new CustomError("Update failed, data is not found or already updated", 404);
+            // Calculate the difference
+            const difference = req.body.quantity - currentSale.quantity // 50 - 5 = 45
+
+            // Update Product with difference
+            const updatedProduct = await Product.updateOne({ _id: currentSale.productId, quantity: { $gte: difference } }, { $inc: { quantity: -difference } });
+
+            if (!updatedProduct.modifiedCount) throw new CustomError(`There is not enough product-quantity for this sale.`, 400)
+        }
+
+        const data = await Sale.findByIdAndUpdate(req.params.id, req.body, { runValidators: true, new: true });
+
+        if (!data) throw new CustomError("Update failed, data is not found or already updated", 404);
 
         res.status(202).send({
             error: false,
-            result
+            data
         });
     },
 
@@ -97,13 +130,13 @@ module.exports = {
             #swagger.summary = "Delete Sale"
         */
 
-        const result = await Sale.findByIdAndDelete(req.params.id)
+        const data = await Sale.findByIdAndDelete(req.params.id)
 
-        if (!result) throw new CustomError("Delete failed, data is not found or already deleted", 404);
+        if (!data) throw new CustomError("Delete failed, data is not found or already deleted", 404);
 
         res.status(200).send({
             error: false,
-            result
+            data
         });
     },
 }

@@ -1,10 +1,9 @@
 "use strict"
-
+/* -------------------------------------------------------
+    | FULLSTACK TEAM | NODEJS / EXPRESS |
+------------------------------------------------------- */
 const router = require('express').Router()
-
-
-router.use('/documents', require('./document'))
-
+/* ------------------------------------------------------- */
 
 // auth:
 router.use('/auth', require('./auth'));
@@ -36,4 +35,5 @@ router.use('/sales', require('./sale'));
 // document:
 router.use('/documents', require('./document'));
 
+/* ------------------------------------------------------- */
 module.exports = router

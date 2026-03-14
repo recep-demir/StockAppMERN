@@ -1,7 +1,9 @@
 "use strict"
-
+/* -------------------------------------------------------
+    | FULLSTACK TEAM | NODEJS / EXPRESS |
+------------------------------------------------------- */
 const { mongoose } = require('../configs/dbConnection')
-
+/* ------------------------------------------------------- */
 
 const purchaseSchema = new mongoose.Schema({
 
@@ -13,7 +15,7 @@ const purchaseSchema = new mongoose.Schema({
 
     firmId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Frim',
+        ref: 'Firm',
         required: true
     },
 

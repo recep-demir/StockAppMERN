@@ -1,4 +1,7 @@
-" use strict"
+"use strict"
+/* -------------------------------------------------------
+    | FULLSTACK TEAM | NODEJS / EXPRESS |
+------------------------------------------------------- */
 
 const User = require("../models/user");
 const Token = require('../models/token');
@@ -54,6 +57,7 @@ module.exports = {
         });
 
     },
+
     refresh: async (req, res) => {
         /*
             #swagger.tags = ['Authentication']
@@ -95,32 +99,31 @@ module.exports = {
         });
     },
 
-    logout : async (req, res) =>{
-
-         /*
+    logout: async (req, res) => {
+        /*
             #swagger.tags = ["Authentication"]
             #swagger.summary = "Token: Logout"
             #swagger.description = 'Delete token-key.'
         */
 
-            const auth = req.headers?.authorization || null;
-            const tokenKey = auth ? auth.split(' ') : null;
+        const auth = req.headers?.authorization || null; // Token ...TokenKey...
+        const tokenKey = auth ? auth.split(' ') : null; // ['Token', '...tokenKey...']
+ 
+        let message = null, result = {};
 
-            let message = null, result = {};
-
-            if(tokenKey) {
-                if (tokenKey[0] == 'Token') {
+        if (tokenKey) { // Sjmple token
+            if (tokenKey[0] == 'Token') {
                 result = await Token.deleteOne({ token: tokenKey[1] });
                 message = 'Token deleted. Logout is OK.'
-            } 
-
-            } else {
-                message = 'Logout is OK'
             }
+        } else { // Jwt token
+            message = 'Logout is OK.'
+        };
 
-            res.status(200).send({
+        res.status(200).send({
             error: false,
             message
         });
-    }
+
+    },
 }

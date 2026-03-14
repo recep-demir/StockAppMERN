@@ -2,12 +2,12 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "StockAppMERN",
+    "title": "Stock Management API",
     "description": "Stock Management System",
-    "termsOfService": "http://www.example.com/#",
+    "termsOfService": "http://www.CourseName.com/#",
     "contact": {
-      "name": "Recep Demir",
-      "email": "demir.rp@gmail.com"
+      "name": "CourseName",
+      "email": "developer@CourseName.com"
     },
     "license": {
       "name": "ISC Licence"
@@ -40,13 +40,73 @@
     "application/json"
   ],
   "paths": {
+    "/account/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "description": "Login with username (or email) and password.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/account/auth/logout": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "Delete token key.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "Delete token key.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/users/": {
       "get": {
         "tags": [
           "Users"
         ],
         "summary": "List Users",
-        "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
+        "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -79,13 +139,13 @@
                   "type": "string",
                   "example": "test@site.com"
                 },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
+                "isActive": {
+                  "type": "boolean",
+                  "example": true
                 },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
+                "isAdmin": {
+                  "type": "boolean",
+                  "example": false
                 }
               }
             }
@@ -151,21 +211,21 @@
                   "type": "string",
                   "example": "test@site.com"
                 },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
+                "isActive": {
+                  "type": "boolean",
+                  "example": true
                 },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
+                "isAdmin": {
+                  "type": "boolean",
+                  "example": false
                 }
               }
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -184,8 +244,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -221,32 +284,32 @@
                   "type": "string",
                   "example": "test@site.com"
                 },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
+                "isActive": {
+                  "type": "boolean",
+                  "example": true
                 },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
+                "isAdmin": {
+                  "type": "boolean",
+                  "example": false
                 }
               }
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "/brands/": {
+    "/stock/brands/": {
       "get": {
         "tags": [
           "Brands"
         ],
         "summary": "List Brands",
-        "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
+        "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -276,7 +339,7 @@
         }
       }
     },
-    "/brands/{id}": {
+    "/stock/brands/{id}": {
       "get": {
         "tags": [
           "Brands"
@@ -320,8 +383,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -340,8 +403,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -368,19 +434,19 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "/categories/": {
+    "/stock/categories/": {
       "get": {
         "tags": [
           "Categories"
         ],
         "summary": "List Categories",
-        "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
+        "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -410,7 +476,7 @@
         }
       }
     },
-    "/categories/{id}": {
+    "/stock/categories/{id}": {
       "get": {
         "tags": [
           "Categories"
@@ -454,8 +520,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -474,8 +540,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -502,19 +571,19 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "/firms/": {
+    "/stock/firms/": {
       "get": {
         "tags": [
           "Firms"
         ],
         "summary": "List Firms",
-        "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
+        "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -544,7 +613,7 @@
         }
       }
     },
-    "/firms/{id}": {
+    "/stock/firms/{id}": {
       "get": {
         "tags": [
           "Firms"
@@ -588,8 +657,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -608,8 +677,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -636,19 +708,19 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "/products/": {
+    "/stock/products/": {
       "get": {
         "tags": [
           "Products"
         ],
         "summary": "List Products",
-        "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
+        "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -678,7 +750,7 @@
         }
       }
     },
-    "/products/{id}": {
+    "/stock/products/{id}": {
       "get": {
         "tags": [
           "Products"
@@ -722,8 +794,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -742,8 +814,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -770,19 +845,19 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "/purchases/": {
+    "/stock/purchases/": {
       "get": {
         "tags": [
           "Purchases"
         ],
         "summary": "List Purchases",
-        "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
+        "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -812,7 +887,7 @@
         }
       }
     },
-    "/purchases/{id}": {
+    "/stock/purchases/{id}": {
       "get": {
         "tags": [
           "Purchases"
@@ -856,8 +931,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -876,8 +951,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -904,19 +982,19 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "/sales/": {
+    "/stock/sales/": {
       "get": {
         "tags": [
           "Sales"
         ],
         "summary": "List Sales",
-        "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
+        "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -946,7 +1024,7 @@
         }
       }
     },
-    "/sales/{id}": {
+    "/stock/sales/{id}": {
       "get": {
         "tags": [
           "Sales"
@@ -990,8 +1068,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -1010,8 +1088,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -1038,8 +1119,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -1064,10 +1145,6 @@
               "example": true
             },
             "unique": {
-              "type": "boolean",
-              "example": true
-            },
-            "index": {
               "type": "boolean",
               "example": true
             }
@@ -1104,10 +1181,6 @@
               "example": true
             },
             "unique": {
-              "type": "boolean",
-              "example": true
-            },
-            "index": {
               "type": "boolean",
               "example": true
             }
@@ -1277,10 +1350,6 @@
             "trim": {
               "type": "boolean",
               "example": true
-            },
-            "required": {
-              "type": "boolean",
-              "example": true
             }
           }
         },
@@ -1291,10 +1360,6 @@
               "type": "function"
             },
             "trim": {
-              "type": "boolean",
-              "example": true
-            },
-            "required": {
               "type": "boolean",
               "example": true
             }
@@ -1362,10 +1427,6 @@
             "required": {
               "type": "boolean",
               "example": true
-            },
-            "unique": {
-              "type": "boolean",
-              "example": true
             }
           }
         },
@@ -1410,7 +1471,7 @@
             },
             "ref": {
               "type": "string",
-              "example": "Frim"
+              "example": "Firm"
             },
             "required": {
               "type": "boolean",
@@ -1456,9 +1517,9 @@
             "type": {
               "type": "function"
             },
-            "required": {
-              "type": "boolean",
-              "example": true
+            "default": {
+              "type": "number",
+              "example": 0
             }
           }
         },
@@ -1468,9 +1529,9 @@
             "type": {
               "type": "function"
             },
-            "required": {
-              "type": "boolean",
-              "example": true
+            "default": {
+              "type": "number",
+              "example": 0
             }
           }
         },
@@ -1480,14 +1541,9 @@
             "type": {
               "type": "function"
             },
-            "set": {
-              "type": "function"
-            },
             "default": {
-              "type": "function"
-            },
-            "transform": {
-              "type": "function"
+              "type": "number",
+              "example": 0
             }
           }
         }
@@ -1550,9 +1606,9 @@
             "type": {
               "type": "function"
             },
-            "required": {
-              "type": "boolean",
-              "example": true
+            "default": {
+              "type": "number",
+              "example": 0
             }
           }
         },
@@ -1562,9 +1618,9 @@
             "type": {
               "type": "function"
             },
-            "required": {
-              "type": "boolean",
-              "example": true
+            "default": {
+              "type": "number",
+              "example": 0
             }
           }
         },
@@ -1574,14 +1630,9 @@
             "type": {
               "type": "function"
             },
-            "set": {
-              "type": "function"
-            },
             "default": {
-              "type": "function"
-            },
-            "transform": {
-              "type": "function"
+              "type": "number",
+              "example": 0
             }
           }
         }

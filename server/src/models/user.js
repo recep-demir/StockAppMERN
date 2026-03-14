@@ -1,7 +1,11 @@
 "use strict"
-const { mongoose } = require('../configs/dbConnection')
+/* -------------------------------------------------------
+    | FULLSTACK TEAM | NODEJS / EXPRESS |
+------------------------------------------------------- */
+const { mongoose } = require('../configs/dbConnection');
 const CustomError = require('../helpers/customError');
 const passwordEncrypt = require('../helpers/passwordEncrypt')
+/* ------------------------------------------------------- */
 
 const userSchema = new mongoose.Schema({
 
@@ -60,9 +64,16 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
-userSchema.pre(['save', 'findOneAndUpdate'], function (next) {
-    const data = this?._update ?? this; 
+/* ------------------------------------------------------- */
+// https://mongoosejs.com/docs/middleware.html
 
+userSchema.pre(['save', 'findOneAndUpdate'], function (next) {
+
+    // console.log('pre-save worked');
+    // console.log(this);
+
+    // _update -> findOneAndUpdate - this -> save
+    const data = this?._update ?? this; 
 
     const isEmailValidated = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email);
     const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(data.password);
@@ -88,7 +99,5 @@ userSchema.pre(['save', 'findOneAndUpdate'], function (next) {
         next(new CustomError('Email is not validated', 400));
     };
 });
-
-
 
 module.exports = mongoose.model("User", userSchema);

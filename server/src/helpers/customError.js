@@ -1,5 +1,3 @@
-//Javascriptin yerlesik Error classindan türetildi.
-
 class CustomError extends Error{
     name = 'CustomError'
 

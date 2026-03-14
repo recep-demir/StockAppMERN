@@ -1,5 +1,7 @@
 "use strict"
-
+/* -------------------------------------------------------
+	EXPRESS - Personnel API
+------------------------------------------------------- */
 require('dotenv').config()
 const HOST = process.env?.HOST || '127.0.0.1'
 const PORT = process.env?.PORT || 8000
@@ -12,8 +14,8 @@ const document = {
 		version: packageJson.version,
 		title: packageJson.title,
 		description: packageJson.description,
-		termsOfService: "http://www.example.com/#",
-		contact: { name: packageJson.author, email: "demir.rp@gmail.com" },
+		termsOfService: "http://www.CourseName.com/#",
+		contact: { name: packageJson.author, email: "developer@CourseName.com" },
 		license: { name: packageJson.license, },
 	},
 	host: `${HOST}:${PORT}`,
@@ -37,7 +39,7 @@ const document = {
 	},
 	security: [{ Token: [] }, { Bearer: [] }],
 	definitions: {
-		
+		// Models:
 		"User": require('./src/models/user').schema.obj,
 		"Brand": require('./src/models/brand').schema.obj,
 		"Category": require('./src/models/category').schema.obj,
@@ -51,5 +53,5 @@ const document = {
 const routes = ['./index.js']
 const outputFile = './src/configs/swagger.json'
 
-
+// Create JSON file:
 swaggerAutogen(outputFile, routes, document)
