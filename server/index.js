@@ -8,6 +8,8 @@ const app = express();
 /* ------------------------------------------------------- */
 // Required Modules:
 
+
+
 // envVariables to process.env:
 require('dotenv').config();
 const HOST = process.env?.HOST || '127.0.0.1'
@@ -23,7 +25,8 @@ dbConnection();
 
 /* ------------------------------------------------------- */
 // Middlewares:
-
+const cors = require('cors');
+app.use(cors()); // app.use(express.json()); satırının hemen civarına ekleyebilirsin.
 // Accept JSON:
 app.use(express.json());
 
