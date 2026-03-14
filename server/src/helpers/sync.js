@@ -52,6 +52,7 @@ module.exports = async function () {
     })
 
     /* Brand */
+    /* Brand */
     const Brand = require('../models/brand')
     await Brand.deleteMany() // !!! Clear collection.
     await Brand.create({
@@ -76,8 +77,8 @@ module.exports = async function () {
     })
     await Brand.create({
         "_id": "65343222b67e9681f937f109",
-        "name": "Kinetix",
-        "image": "https://seeklogo.com/images/K/kinetix-logo-73FB3FD17D-seeklogo.com.png"
+        "name": "Decathlon",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Decathlon_Logo.png/1200px-Decathlon_Logo.png"
     })
     await Brand.create({
         "_id": "65343222b67e9681f937f110",
@@ -91,8 +92,8 @@ module.exports = async function () {
     })
     await Brand.create({
         "_id": "65343222b67e9681f937f123",
-        "name": "Ülker",
-        "image": "https://cdn.worldvectorlogo.com/logos/ulker.svg"
+        "name": "Nestlé",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Nestl%C3%A9_logo.svg/2560px-Nestl%C3%A9_logo.svg.png"
     })
     await Brand.create({
         "_id": "65343222b67e9681f937f129",
@@ -135,66 +136,66 @@ module.exports = async function () {
     await Firm.deleteMany() // !!! Clear collection.
     await Firm.create({
         "_id": "65343222b67e9681f937f302",
-        "name": "BOYNER",
-        "phone": "0212 444 00 54",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Boyner_Logo.jpg/800px-Boyner_Logo.jpg",
-        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 245/A, 34396 Sarıyer/İstanbul, Türkiye"
+        "name": "Manor",
+        "phone": "+41 848 802 805",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Manor_Logo.svg/1200px-Manor_Logo.svg.png",
+        "address": "Rebgasse 34, 4058 Basel, Switzerland"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f303",
-        "name": "FLO",
-        "phone": "0212 444 22 23",
-        "image": "https://akillifabrikalar.com.tr/wp-content/uploads/2021/11/Floo2.png",
-        "address": "Mahmutbey, Taşocağı Yolu Cad. No:24, 34218 Bağcılar/İstanbul, Türkiye"
+        "name": "Deichmann",
+        "phone": "+41 44 745 45 45",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Deichmann_SE_Logo.svg/1200px-Deichmann_SE_Logo.svg.png",
+        "address": "Dietikon, Switzerland"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f304",
-        "name": "HEPSIBURADA",
-        "phone": "0212 444 44 33",
-        "image": "https://logowik.com/content/uploads/images/hepsiburada1183.jpg",
-        "address": "Kuştepe, Kule 5, Mecidiyeköy Yolu Cd. Trump Towers No:12 Kat 18, 34387 Şişli/İstanbul, Türkiye"
+        "name": "Amazon Europe",
+        "phone": "+352 26 73 30 00",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1200px-Amazon_logo.svg.png",
+        "address": "38 avenue John F. Kennedy, L-1855 Luxembourg"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f305",
-        "name": "Trendyol",
-        "phone": "0212 444 22 22",
-        "image": "https://seeklogo.com/images/T/trendyol-logo-EE0DAED204-seeklogo.com.png",
-        "address": "Maslak, Büyükdere Cd. No:237, 34485 Sarıyer/İstanbul, Türkiye"
+        "name": "Zalando",
+        "phone": "+49 30 2000 88 400",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Zalando_logo.svg/1200px-Zalando_logo.svg.png",
+        "address": "Valeska-Gert-Straße 5, 10243 Berlin, Germany"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f310",
-        "name": "n11",
-        "phone": "0212 444 22 66",
-        "image": "https://i.pinimg.com/originals/af/d7/12/afd7126448b385ea3013d41797adde20.png",
-        "address": "Mahmutbey, Taşocağı Yolu Cad. No:24, 34218 Bağcılar/İstanbul, Türkiye"
+        "name": "eBay Europe",
+        "phone": "+41 31 528 18 10",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/1200px-EBay_logo.svg.png",
+        "address": "Helvetiastrasse 15/17, 3005 Bern, Switzerland"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f315",
-        "name": "Morhipo",
-        "phone": "0212 444 44 44",
-        "image": "https://upload.wikimedia.org/wikipedia/tr/archive/3/32/20181016101908%21Morhipo.png",
-        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 245/A, 34396 Sarıyer/İstanbul, Türkiye"
+        "name": "ASOS",
+        "phone": "+44 20 7756 1000",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/ASOS_logo.svg/1200px-ASOS_logo.svg.png",
+        "address": "Greater London House, Hampstead Road, London, UK"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f333",
-        "name": "ÜLker",
-        "phone": "2124445566",
-        "image": "https://www.ulker.com.tr/documents/ulker-logo.png",
-        "address": "Kısıklı, Ferah Cd. No:1, 34692 Üsküdar/İstanbul, Türkiye"
+        "name": "Migros",
+        "phone": "+41 800 84 08 48",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Migros_logo.svg/1200px-Migros_logo.svg.png",
+        "address": "Limmatstrasse 152, 8031 Zürich, Switzerland"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f334",
-        "name": "Eti",
-        "phone": "0212 444 00 53",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Eti_logo.png",
-        "address": "Uğur Mumcu, 2271. Sk. No:15, 34270 Sultangazi/İstanbul, Türkiye"
+        "name": "Coop",
+        "phone": "+41 800 400 044",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Coop_%28Switzerland%29_logo.svg/1200px-Coop_%28Switzerland%29_logo.svg.png",
+        "address": "Thiersteinerallee 12, 4053 Basel, Switzerland"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f335",
-        "name": "Çetinkaya",
-        "phone": "0212 444 00 55",
-        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU1Mug9ruTOC1x8LGeNAr-ouWrWm29Z6u91QMU8ZfE&s",
-        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 245/A, 34396 Sarıyer/İstanbul, Türkiye"
+        "name": "C&A",
+        "phone": "+41 41 228 90 90",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/C%26A_logo.svg/1200px-C%26A_logo.svg.png",
+        "address": "Weggisgasse 5, 6004 Luzern, Switzerland"
     })
 
     /* Product */
@@ -209,21 +210,21 @@ module.exports = async function () {
     })
     await Product.create({
         "_id": "65343222b67e9681f937f422",
-        "name": "Link",
+        "name": "Nespresso",
         "categoryId": "65343222b67e9681f937f202",
         "brandId": "65343222b67e9681f937f123",
         "stock": 910
     })
     await Product.create({
         "_id": "65343222b67e9681f937f423",
-        "name": "Cola Turka",
+        "name": "San Pellegrino",
         "categoryId": "65343222b67e9681f937f202",
         "brandId": "65343222b67e9681f937f123",
         "stock": 750
     })
     await Product.create({
         "_id": "65343222b67e9681f937f426",
-        "name": "Rondo",
+        "name": "KitKat",
         "categoryId": "65343222b67e9681f937f201",
         "brandId": "65343222b67e9681f937f123",
         "stock": 900
