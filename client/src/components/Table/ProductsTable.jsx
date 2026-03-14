@@ -12,7 +12,7 @@ const getRowId=(row)=>{
 
 export default function ProductsTable() {
     const {products}=useSelector((state)=>state.stock)
-    const {deleteStockData} = useStockCall
+    const {deleteStockData} = useStockCall()
 
     
 //! valueGetter: data'dan çekemediğimzi bilgileri çekmemizi sağlıyor field kısmında catergoryId.name kullanmamıza izin vermiyor fakat valueGetter'da bunu yapabiliyoruz.
@@ -56,7 +56,7 @@ const columns = [
     align:"center",
     width: 160,
     renderCell: (params)=>(
-        <DeleteIcon oncClick={()=>deleteStockData("products", params.id)}/>
+        <DeleteIcon onClick={()=>deleteStockData("products", params.id)}/>
     )
   },
 ];
