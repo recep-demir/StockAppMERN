@@ -8,12 +8,11 @@ const app = express();
 /* ------------------------------------------------------- */
 // Required Modules:
 
-
-
 // envVariables to process.env:
 require('dotenv').config();
-const HOST = process.env?.HOST || '127.0.0.1'
-const PORT = process.env?.PORT || 8000
+
+// DÜZELTME: Canlı ortamda (Render) HOST tanımlanmamalıdır veya 0.0.0.0 olmalıdır.
+const PORT = process.env.PORT || 8000;
 
 app.set("query parser", "extended");
 /* ------------------------------------------------------- */
@@ -26,7 +25,8 @@ dbConnection();
 /* ------------------------------------------------------- */
 // Middlewares:
 const cors = require('cors');
-app.use(cors()); // app.use(express.json()); satırının hemen civarına ekleyebilirsin.
+app.use(cors()); 
+
 // Accept JSON:
 app.use(express.json());
 
@@ -67,9 +67,13 @@ app.use(require('./src/routes'));
 // errorHandler:
 app.use(require('./src/middlewares/errorHandler'))
 
+/* ------------------------------------------------------- */
 // RUN SERVER:
-app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`))
+
+// DÜZELTME: HOST parametresini sildik. 
+// Bu sayede sunucu hem lokalde hem Render'da tüm ağ arayüzlerini dinleyebilir.
+app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
-// require('./src/helpers/sync')() // !!! It clear database.
+// require('./src/helpers/sync')()
