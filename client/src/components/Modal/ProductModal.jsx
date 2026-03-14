@@ -26,9 +26,7 @@ export default function ProductModal({ handleClose, open, initialState }) {
 
   const { categories, brands } = useSelector((state) => state.stock);
 
-  const [info, setInfo] = useState({
-    initialState
-  });
+ const [info, setInfo] = useState(initialState);
 
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
@@ -58,7 +56,7 @@ export default function ProductModal({ handleClose, open, initialState }) {
                 label="Category"
                 onChange={handleChange}
               >
-                {categories.map((category, index) => (
+                {categories?.map((category, index) => (
                   <MenuItem key={index} value={category._id}>
                     {category.name}
                   </MenuItem>
@@ -75,7 +73,7 @@ export default function ProductModal({ handleClose, open, initialState }) {
                 label="Brands"
                 onChange={handleChange}
               >
-                {brands.map((brand, index) => (
+                {brands?.map((brand, index) => (
                   <MenuItem key={index} value={brand._id}>
                     {brand.name}
                   </MenuItem>
