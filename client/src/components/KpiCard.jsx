@@ -12,9 +12,9 @@ function classNames(...classes) {
 export default function KpiCard() {
     const { sales, purchases } = useSelector((state)=>state.stock)
 
-    const totalSales = sales.reduce((acc, sale)=> acc+sale.amount, 0)
-    const totalPurchases= purchases.reduce((acc,purchase)=> acc+purchase.amount, 0)
-    const totalCash = totalSales - totalPurchases
+    const totalSales = sales?.reduce((acc, sale) => acc + (sale.priceTotal || 0), 0) || 0;
+    const totalPurchases = purchases?.reduce((acc, purchase) => acc + (purchase.priceTotal || 0), 0) || 0;
+    const totalCash = totalSales - totalPurchases;
 
     const data = [
         {
@@ -24,7 +24,7 @@ export default function KpiCard() {
         },
         {
           name: 'Cash',
-          value: `${totalPurchases}`,
+          value: `€${totalCash}`,
           color: "fuchsia"
         },
         {
