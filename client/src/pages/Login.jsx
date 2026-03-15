@@ -16,12 +16,12 @@ const Login = () => {
   const { login } = useAuthCall();
 
   const SignupSchema = Yup.object().shape({
-    username: Yup.string()
-      .min(5, "Kullanıcı adı 5 karakterden az olamaz")
-      .max(50, "Kullanıcı adı 50 karakterden fazla olamaz")
-      .required("Kullanıcı adı zorunludur"),
-    password: Yup.string().required("Password zorunludur"),
-  });
+  username: Yup.string()
+    .min(5, "Username must be at least 5 characters")
+    .max(50, "Username cannot exceed 50 characters")
+    .required("Username is required"),
+  password: Yup.string().required("Password is required"),
+});
   return (
     <Container maxWidth="lg">
       <Grid
