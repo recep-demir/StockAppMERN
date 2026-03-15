@@ -75,8 +75,8 @@ const Login = () => {
               marginTop={2}
             >
               {"Copyright © "}
-              <Link color="inherit" href="https://www.github.com/UYSALCORP">
-                UYSALCORP
+              <Link color="inherit" href="https://github.com/recep-demir">
+                Recep Demir
               </Link>{" "}
               {new Date().getFullYear()}
               {"."}
